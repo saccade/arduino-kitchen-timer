@@ -2,8 +2,7 @@
 
 #include "seven_segment.h"
 
-#include "hardware/gpio.h"
-#include "pico/stdlib.h"
+#include "Arduino.h"
 
 SevenSegmentClock::SevenSegmentClock() {
   // set output pins:
