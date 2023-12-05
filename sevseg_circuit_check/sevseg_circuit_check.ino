@@ -1,4 +1,5 @@
-#define MS_PER_DIGIT 3
+#define MS_PER_DIGIT_A 3
+#define MS_PER_DIGIT_B 3
 
 uint32_t active_mask = 0;
 
@@ -23,7 +24,7 @@ void update_mask(uint32_t mask) {
 void loop() {
   switch ((millis() % 2000) / 500) {
     case 0:
-      switch ((millis() / MS_PER_DIGIT) % 4) {
+      switch ((millis() / MS_PER_DIGIT_A) % 4) {
         case 0:
           update_mask(95 + (1 << 13));
           break;
@@ -38,8 +39,7 @@ void loop() {
       }
       break;
     case 2:
-          // switch ((millis() / MS_PER_DIGIT) % 4) {
-          switch ((millis() / 3) % 4) {
+          switch ((millis() / MS_PER_DIGIT_B) % 4) {
         case 0:
           update_mask(209 + (1 << 13));
           break;
