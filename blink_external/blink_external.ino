@@ -18,10 +18,11 @@ bool led_state = true;
 
 // setup() runs once at startup, then loop() starts.
 void setup() {
-  Serial.begin(115200);            // start modem.
-  delay(100);                      // wait for modem and serial monitor to sync up.
-  Serial.println("\nstart");       // here we go!
-  pinMode(LED_WRITE_PIN, OUTPUT);  // ready LED
+  Serial.begin(115200);                    // start modem.
+  delay(100);                              // wait for modem and serial monitor to sync up.
+  Serial.println("\nstart");               // here we go!
+  pinMode(LED_WRITE_PIN, OUTPUT);          // ready LED
+  pinMode(ANALOG_READ_PIN, INPUT_PULLUP);  // pullup defaults to HIGH
 
   // Check LED supply voltage.
   digitalWrite(LED_WRITE_PIN, HIGH);         // turn on
@@ -47,7 +48,7 @@ void setup() {
 void loop() {
   // Update loop counter.
   step_count = step_count + 1;
-  
+
   // Switch logic state.
   led_state = not led_state;
   // Switch the on-board LED on or off according to logic state.

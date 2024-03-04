@@ -3,10 +3,14 @@
 // Use pin 7 for LED.
 #define LED_WRITE_PIN 7
 
+// Use analog pin A0 to check LED supply voltage.
+#define ANALOG_READ_PIN A0
+
 // These variables get declared here so the loop can use them.
 
 // Initially sleep for 1000 ms (1 second).
 int base_sleep_millis = 1000;
+int millis_to_sleep = base_sleep_millis;
 
 // Keep track of how many times loop is run.
 int step_count = 0;
@@ -16,16 +20,19 @@ bool led_state = true;
 
 // setup() runs once at startup, then loop() starts.
 void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);  // turn off built-in LED.
   Serial.begin(115200);          // start modem.
   delay(100);                    // wait for modem and serial monitor to sync up.
   Serial.println("\nstart");     // here we go!
   pinMode(LED_WRITE_PIN, OUTPUT);  // ready LED
+  pinMode(ANALOG_READ_PIN, INPUT_PULLUP);
 
-  check_led_voltage(LED_WRITE_PIN);
+  check_led_voltage(LED_WRITE_PIN, ANALOG_READ_PIN);
 }
 
 // loop() runs over and over until something stops it (power loss, software crash, thermal breakdown...).
 void loop() {
+
   // Update loop counter.
   step_count = step_count + 1;
 
@@ -35,11 +42,10 @@ void loop() {
   
   // Switch the on-board LED on or off according to logic state.
   digitalWrite(LED_WRITE_PIN, led_state? HIGH: LOW);
-  
 
   // This is how long we'll sleep before switching the LED again.
   // The time between gets shorter and shorter; you can safely ignore the math.
-  int millis_to_sleep = round(base_sleep_millis / pow(step_count, 0.75));
+  millis_to_sleep = round(base_sleep_millis / pow(step_count, 0.75));
 
   // Print some info to the serial modem.
   Serial.print("step " + String(step_count));

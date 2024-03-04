@@ -53,7 +53,6 @@ void TimerController::HandlePushButton() {
   bool is_pressed = rotary_encoder_->is_pressed();
   if (is_pressed and not button_is_pressed_) {
     button_is_pressed_ = true;
-    Serial.println("controller press");
     if (clock_->StopwatchIsStopped()) {
       ResetClock();
     } else if (clock_->TimerIsCountingDown()) {
@@ -67,7 +66,6 @@ void TimerController::HandlePushButton() {
     HandleOutput();
   } else if (not is_pressed and button_is_pressed_) {
     button_is_pressed_ = false;
-    Serial.println("controller release");
       if (release_button_to_reset_) {
         release_button_to_reset_ = false;
         ResetClock();

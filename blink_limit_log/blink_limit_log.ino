@@ -1,6 +1,6 @@
 #define LED_WRITE_PIN 7
 
-#include "check_voltage.h"
+#include "led_voltage.h"
 #include "logging.h"
 
 LogEveryNSec logger;
@@ -14,7 +14,8 @@ void setup() {
   pinMode(LED_WRITE_PIN, OUTPUT);
   check_led_voltage(LED_WRITE_PIN);
 
-  logger = LogEveryNSec(3.812);  // log at pi/12 Hz
+  // logger = LogEveryNSec(3.812);  // log at pi/12 Hz
+  logger = LogEveryNSec(0.5);  // log at 4 Hz
 }
 
 long base_sleep_micros = 1e6;
@@ -43,6 +44,6 @@ void loop() {
   led_state = flip_led(led_state);
 
   long micros_to_sleep = round(base_sleep_micros / pow(count, 0.6));
-  logger.Log("step " + String(count) + "; sleep micros: " + String(micros_to_sleep) + "; LED frequency: " + String(round(1e6 / micros_to_sleep)) + " Hz");
+  logger.Log("step " + String(count) + "; sleep micros: " + String(micros_to_sleep) + "; LED frequency: " + String(round(1e6 / micros_to_sleep)) + " Hz; LED frequency: " + String(round(1e6 / micros_to_sleep)) + " Hz; LED voltage: " + String(led_voltage()) + " V");
   wait(micros_to_sleep);
 }

@@ -23,8 +23,8 @@ void setup() {
   digitalWrite(5, HIGH);
   pinMode(6, OUTPUT);
   digitalWrite(6, LOW);
-}
 
+}
 
 void loop() {
   encoder->update();
@@ -47,11 +47,13 @@ void loop() {
     pressed = encoder->is_pressed();
   }
 
-  // If there's serial input, print the encoder movement. Zero the
-  // encoder if the input begins with 'z'.
+  // If there's serial input, print the encoder movement.
   if (Serial.available()) {
     String command = Serial.readString();
-    if (command.length() && command[0] == 'z') {
+    if (command.length() && command[0] == 'v') {
+      Serial.println("voltage 1: " + String(analogRead(A0) / 200.0));
+    }// Zero the encoder if the input begins with 'z'.
+    else if (command.length() && command[0] == 'z') {
       PrintAndZero();
     } else
       Serial.println("m: " + command + " " + String(encoder->movement()));
