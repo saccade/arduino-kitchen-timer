@@ -14,8 +14,7 @@ void setup() {
   pinMode(LED_WRITE_PIN, OUTPUT);
   check_led_voltage(LED_WRITE_PIN);
 
-  // logger = LogEveryNSec(3.812);  // log at pi/12 Hz
-  logger = LogEveryNSec(0.5);  // log at 4 Hz
+  logger = LogEveryNSec(3.812);  // log at pi/12 Hz
 }
 
 long base_sleep_micros = 1e6;

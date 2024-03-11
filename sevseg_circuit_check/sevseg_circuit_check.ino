@@ -1,16 +1,15 @@
 #define MS_PER_DIGIT_A 3
-#define MS_PER_DIGIT_B 3
+#define MS_PER_DIGIT_B 100
 
-uint32_t active_mask = 0;
+#define FULL_CYCLE_MS 2000  // repeat every 2 seconds
+
+uint32_t active_mask = 4193280;
 
 void setup() {
   Serial.begin(115200);
   Serial.println("start");
-  gpio_init_mask(15615);
-  gpio_set_dir_out_masked(15615);
-  for (int pin = 10; pin <= 13; pin++) {
-    gpio_set_outover(pin, GPIO_OVERRIDE_INVERT);
-  }
+  gpio_init_mask(active_mask);
+  gpio_set_dir_out_masked(active_mask);
 }
 
 void update_mask(uint32_t mask) {
@@ -22,35 +21,35 @@ void update_mask(uint32_t mask) {
 }
 
 void loop() {
-  switch ((millis() % 2000) / 500) {
+  switch ((millis() % FULL_CYCLE_MS) / (FULL_CYCLE_MS / 4)) {
     case 0:
       switch ((millis() / MS_PER_DIGIT_A) % 4) {
         case 0:
-          update_mask(95 + (1 << 13));
+          update_mask(2010112);
           break;
         case 1:
-          update_mask(216 + (1 << 12));
+          update_mask(2288640);
           break;
         case 2:
-          update_mask(216 + (1 << 11));
+          update_mask(2419712);
           break;
         case 3:
-          update_mask(217 + (1 << 10));
+          update_mask(2583552);
       }
       break;
     case 2:
           switch ((millis() / MS_PER_DIGIT_B) % 4) {
         case 0:
-          update_mask(209 + (1 << 13));
+          update_mask(502784);
           break;
         case 1:
-          update_mask(216 + (1 << 12));
+          update_mask(2288640);
           break;
         case 2:
-          update_mask(218 + (1 << 11));
+          update_mask(2944000);
           break;
         case 3:
-          update_mask(33 + (1 << 10));
+          update_mask(2560000);
       }
       break;
     default:

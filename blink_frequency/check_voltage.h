@@ -10,7 +10,7 @@ void check_led_voltage(int led_write_pin, int analog_read_pin) {
     Serial.print("Waiting five seconds...   ");
     delay(5000);
     Serial.println("Proceeding.");
-  } else if (voltage > 2.4) {
+  } else if (voltage > 3.0) {
     digitalWrite(led_write_pin, LOW);  // turn off
     Serial.println("\nSupply voltage is too high! Stopping.");
     delay(100);

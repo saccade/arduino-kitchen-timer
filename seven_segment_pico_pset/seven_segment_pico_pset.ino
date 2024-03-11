@@ -9,7 +9,7 @@ void update_digits(SevenSegmentClock& display) {
   if (millis() / ms_per_frame <= frame) {
     return;
   }
-  frame = (millis() / ms_per_frame) % 10;
+  frame = (millis() / ms_per_frame) % 9;
   display.set_first_pair(11 * frame + 01);
   display.set_second_pair(11 * frame + 23);
 }

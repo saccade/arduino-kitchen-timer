@@ -21,21 +21,21 @@ E D P C G 3
 
 #include <stdint.h>
 
-#define A_GPIO 6
-#define B_GPIO 0
-#define C_GPIO 4
-#define D_GPIO 2
-#define E_GPIO 7
-#define F_GPIO 1
-#define G_GPIO 3
-#define P_GPIO 5
+#define MS_PER_DIGIT 4
 
-#define C0_GPIO 13
-#define C1_GPIO 12
-#define C2_GPIO 11
-#define C3_GPIO 10
+#define A_GPIO 11
+#define B_GPIO 16
+#define C_GPIO 13
+#define D_GPIO 20
+#define E_GPIO 10
+#define F_GPIO 19
+#define G_GPIO 14
+#define P_GPIO 12
 
-#define MS_PER_DIGIT 250
+#define C0_GPIO 21
+#define C1_GPIO 18
+#define C2_GPIO 17
+#define C3_GPIO 15
 
 class SevenSegmentClock {
 public:

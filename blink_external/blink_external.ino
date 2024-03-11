@@ -34,7 +34,7 @@ void setup() {
     Serial.print("Waiting five seconds...   ");
     delay(5000);
     Serial.println("Proceeding.");
-  } else if (voltage > 2.4) {
+  } else if (voltage > 3.0) {
     digitalWrite(LED_WRITE_PIN, LOW);  // turn off
     Serial.println("\nSupply voltage is too high! Stopping.");
     delay(100);
